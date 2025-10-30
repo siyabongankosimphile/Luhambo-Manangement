@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luhambo Maintenance Reporting System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <!-- Home Page -->
+    <div id="home-page" class="page active">
+        <nav class="navbar">
+            <div class="container nav-container">
+                <div class="logo">
+                    <h2>Luhambo Maintenance Reporting System</h2>
+                </div>
+                <div class="nav-buttons">
+                    <button class="btn btn-outline" onclick="showPage('login-page')">Login</button>
+                    <button class="btn btn-primary" onclick="showPage('register-page')">Register</button>
+                </div>
+            </div>
+        </nav>
+
+        <section class="hero">
+            <div class="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="https://pplx-res.cloudinary.com/image/upload/v1761762868/pplx_project_search_images/5a7431a31e3c60b52da6bee29d6111b8099d9fec.png" alt="Modern student accommodation">
+                        <div class="carousel-caption">
+                            <h1>Luhambo Maintenance Reporting System</h1>
+                            <p>Report issues, track progress, and stay connected</p>
+                            <div class="hero-buttons">
+                                <button class="btn btn-primary btn-lg" onclick="showPage('login-page')">Report Issue</button>
+                                <button class="btn btn-outline btn-lg" onclick="scrollToAbout()">Learn More</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://pplx-res.cloudinary.com/image/upload/v1761762868/pplx_project_search_images/b327792b7cc8bc03b7d0956ebd2cc5d031e5a386.png" alt="Student dormitory room">
+                        <div class="carousel-caption">
+                            <h1>Your Comfort, Our Priority</h1>
+                            <p>Quick and efficient maintenance services</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://pplx-res.cloudinary.com/image/upload/v1761762869/pplx_project_search_images/80c2e0418c5d7d5bc5f083d39b94217e8dd6c1db.png" alt="Maintenance service">
+                        <div class="carousel-caption">
+                            <h1>Professional Maintenance Team</h1>
+                            <p>Available to help with all your accommodation needs</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://pplx-res.cloudinary.com/image/upload/v1761762868/pplx_project_search_images/315c51f08d86cf5f31958128ed78edf32ca34b77.png" alt="Student accommodation building">
+                        <div class="carousel-caption">
+                            <h1>Modern Living Spaces</h1>
+                            <p>Well-maintained facilities for your academic journey</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-dots">
+                    <span class="dot active" onclick="setCarouselSlide(0)"></span>
+                    <span class="dot" onclick="setCarouselSlide(1)"></span>
+                    <span class="dot" onclick="setCarouselSlide(2)"></span>
+                    <span class="dot" onclick="setCarouselSlide(3)"></span>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <div class="container">
+                <h2>About Our System</h2>
+                <p>The Luhambo Maintenance Reporting System is designed to streamline communication between students and maintenance staff. Report issues quickly, track their progress in real-time, and communicate directly with our team to ensure your living space is comfortable and functional.</p>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="container">
+                <h2>Key Features</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">📝</div>
+                        <h3>Easy Reporting</h3>
+                        <p>Submit maintenance requests quickly and easily with our simple form</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">💬</div>
+                        <h3>Real-time Chat</h3>
+                        <p>Communicate directly with maintenance team about your issues</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <h3>Status Tracking</h3>
+                        <p>Track your request from submission to completion</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h3>Quick Response</h3>
+                        <p>Get timely updates on your maintenance requests</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <div class="container">
+                <p>&copy; 2025 Luhambo Student Accommodation. All rights reserved.</p>
+                <p>Contact: info@luhambostudents.co.za | Phone: +27 123 456 789</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Login Page -->
+    <div id="login-page" class="page">
+        <div class="auth-container">
+            <div class="auth-card">
+                <div class="auth-header">
+                    <h2>LUHAMBO</h2>
+                    <p>Maintenance Reporting System</p>
+                </div>
+                <div class="tab-container">
+                    <button class="tab-btn active" onclick="switchLoginTab('student')">Student Login</button>
+                    <button class="tab-btn" onclick="switchLoginTab('admin')">Admin Login</button>
+                </div>
+                <form id="login-form" onsubmit="handleLogin(event)">
+                    <div id="student-login" class="login-tab active">
+                        <div class="form-group">
+                            <label>Student Number / Email</label>
+                            <input type="text" id="student-identifier" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" id="student-password" class="form-control" required>
+                        </div>
+                    </div>
+                    <div id="admin-login" class="login-tab">
+                        <div class="form-group">
+                            <label>Username</label>
+                            <input type="text" id="admin-username" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" id="admin-password" class="form-control">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">Login</button>
+                </form>
+                <div class="auth-links">
+                    <a href="#" onclick="showPage('register-page'); return false;">Don't have an account? Register</a>
+                    <a href="#" onclick="showPage('home-page'); return false;">Back to Home</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Page -->
+    <div id="register-page" class="page">
+        <div class="auth-container">
+            <div class="auth-card">
+                <div class="auth-header">
+                    <h2>LUHAMBO</h2>
+                    <p>Student Registration</p>
+                </div>
+                <form id="register-form" onsubmit="handleRegister(event)">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" id="reg-fullname" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Student Number</label>
+                        <input type="text" id="reg-studentno" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="reg-email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Building Name</label>
+                        <select id="reg-building" class="form-control" required>
+                            <option value="">Select Building</option>
+                            <option value="Building A">INDLOVU</option>
+                            <option value="Building B">INYATSI</option>
+                            <option value="Building C">BHEJANE C</option>
+                            <option value="Building D">LUDVUBU</option>
+                            <option value="Building C">INGWE</option>
+                            <option value="Building D">INWENYAMA</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Room Number</label>
+                        <input type="text" id="reg-room" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Floor</label>
+                        <select id="reg-floor" class="form-control" required>
+                            <option value="">Select Floor</option>
+                            <option value="Ground Floor">Ground Floor</option>
+                            <option value="First Floor">First Floor</option>
+                            <option value="Second Floor">Second Floor</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" id="reg-password" class="form-control" required minlength="6">
+                    </div>
+                    <div class="form-group">
+                        <label>Confirm Password</label>
+                        <input type="password" id="reg-confirm-password" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">Register</button>
+                </form>
+                <div class="auth-links">
+                    <a href="#" onclick="showPage('login-page'); return false;">Already have an account? Login</a>
+                    <a href="#" onclick="showPage('home-page'); return false;">Back to Home</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Student Dashboard -->
+    <div id="student-dashboard" class="page">
+        <nav class="navbar">
+            <div class="container nav-container">
+                <div class="logo">
+                    <h2>LUHAMBO</h2>
+                </div>
+                <div class="nav-menu">
+                    <a href="#" onclick="showStudentView('dashboard'); return false;" class="nav-link active">Dashboard</a>
+                    <a href="#" onclick="showStudentView('submit'); return false;" class="nav-link">Submit Report</a>
+                    <a href="#" onclick="showStudentView('reports'); return false;" class="nav-link">My Reports</a>
+                    <button class="btn btn-outline btn-sm" onclick="logout()">Logout</button>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container dashboard-container">
+            <!-- Dashboard View -->
+            <div id="student-dashboard-view" class="dashboard-view active">
+                <h1 id="student-welcome">Welcome, Student</h1>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">📋</div>
+                        <div class="stat-info">
+                            <h3 id="total-reports-stat">0</h3>
+                            <p>Total Reports</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon warning">⏳</div>
+                        <div class="stat-info">
+                            <h3 id="pending-reports-stat">0</h3>
+                            <p>Pending</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon info">🔧</div>
+                        <div class="stat-info">
+                            <h3 id="inprogress-reports-stat">0</h3>
+                            <p>In Progress</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon success">✓</div>
+                        <div class="stat-info">
+                            <h3 id="completed-reports-stat">0</h3>
+                            <p>Completed</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>Recent Reports</h2>
+                    <div class="table-container">
+                        <table id="student-recent-reports-table">
+                            <thead>
+                                <tr>
+                                    <th>Report ID</th>
+                                    <th>Issue</th>
+                                    <th>Category</th>
+                                    <th>Status</th>
+                                    <th>Date</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="student-recent-reports-body">
+                                <tr>
+                                    <td colspan="6" class="empty-state">No reports submitted yet</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Submit Report View -->
+            <div id="student-submit-view" class="dashboard-view">
+                <h1>Submit Maintenance Report</h1>
+                <div class="card">
+                    <form id="submit-report-form" onsubmit="handleSubmitReport(event)">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Student Number</label>
+                                <input type="text" id="report-studentno" class="form-control" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label>Building Name</label>
+                                <input type="text" id="report-building" class="form-control" readonly>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Room Number</label>
+                                <input type="text" id="report-room" class="form-control" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label>Floor</label>
+                                <input type="text" id="report-floor" class="form-control" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Issue Category</label>
+                            <select id="report-category" class="form-control" required>
+                                <option value="">Select Category</option>
+                                <option value="Plumbing">Plumbing</option>
+                                <option value="Electrical">Electrical</option>
+                                <option value="Furniture">Furniture</option>
+                                <option value="Doors/Windows">Doors/Windows</option>
+                                <option value="Cleaning">Cleaning</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Issue Description</label>
+                            <textarea id="report-description" class="form-control" rows="4" required placeholder="Describe the issue in detail..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Priority</label>
+                            <select id="report-priority" class="form-control" required>
+                                <option value="Low">Low</option>
+                                <option value="Normal" selected>Normal</option>
+                                <option value="High">High</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Upload Image (Optional)</label>
+                            <input type="file" id="report-image" class="form-control" accept="image/*" onchange="previewImage(event)">
+                            <div id="image-preview" class="image-preview"></div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit Report</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- My Reports View -->
+            <div id="student-reports-view" class="dashboard-view">
+                <h1>My Reports</h1>
+                <div class="card">
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Report ID</th>
+                                    <th>Description</th>
+                                    <th>Category</th>
+                                    <th>Status</th>
+                                    <th>Priority</th>
+                                    <th>Date</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="student-all-reports-body">
+                                <tr>
+                                    <td colspan="7" class="empty-state">No reports found</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div id="admin-dashboard" class="page">
+        <nav class="navbar">
+            <div class="container nav-container">
+                <div class="logo">
+                    <h2>LUHAMBO</h2>
+                </div>
+                <div class="nav-menu">
+                    <a href="#" onclick="showAdminView('dashboard'); return false;" class="nav-link active">Dashboard</a>
+                    <a href="#" onclick="showAdminView('reports'); return false;" class="nav-link">All Reports</a>
+                    <a href="#" onclick="showAdminView('users'); return false;" class="nav-link">Users</a>
+                    <button class="btn btn-outline btn-sm" onclick="logout()">Logout</button>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container dashboard-container">
+            <!-- Admin Dashboard View -->
+            <div id="admin-dashboard-view" class="dashboard-view active">
+                <h1 id="admin-welcome">Welcome, Administrator</h1>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">📋</div>
+                        <div class="stat-info">
+                            <h3 id="admin-total-reports-stat">0</h3>
+                            <p>Total Reports</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon warning">⏳</div>
+                        <div class="stat-info">
+                            <h3 id="admin-pending-reports-stat">0</h3>
+                            <p>Pending</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon info">🔧</div>
+                        <div class="stat-info">
+                            <h3 id="admin-inprogress-reports-stat">0</h3>
+                            <p>In Progress</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon success">✓</div>
+                        <div class="stat-info">
+                            <h3 id="admin-completed-today-stat">0</h3>
+                            <p>Completed Today</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">👥</div>
+                        <div class="stat-info">
+                            <h3 id="admin-total-users-stat">0</h3>
+                            <p>Total Students</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="charts-grid">
+                    <div class="card">
+                        <h3>Reports by Status</h3>
+                        <div id="reports-by-status" class="chart-blocks"></div>
+                    </div>
+                    <div class="card">
+                        <h3>Reports by Building</h3>
+                        <div id="reports-by-building" class="chart-bars"></div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>Recent Activity</h2>
+                    <div id="recent-activity" class="activity-timeline"></div>
+                </div>
+            </div>
+
+            <!-- Admin Reports View -->
+            <div id="admin-reports-view" class="dashboard-view">
+                <h1>All Reports</h1>
+                <div class="card">
+                    <div class="filters">
+                        <select id="filter-status" class="form-control" onchange="filterAdminReports()">
+                            <option value="">All Status</option>
+                            <option value="pending">Pending</option>
+                            <option value="in-progress">In Progress</option>
+                            <option value="completed">Completed</option>
+                        </select>
+                        <select id="filter-building" class="form-control" onchange="filterAdminReports()">
+                            <option value="">All Buildings</option>
+                           <option value="">Select Building</option>
+                            <option value="Building A">INDLOVU</option>
+                            <option value="Building B">INYATSI</option>
+                            <option value="Building C">BHEJANE C</option>
+                            <option value="Building D">LUDVUBU</option>
+                            <option value="Building C">INGWE</option>
+                            <option value="Building D">INWENYAMA</option>
+                        </select>
+                        <select id="filter-priority" class="form-control" onchange="filterAdminReports()">
+                            <option value="">All Priority</option>
+                            <option value="Low">Low</option>
+                            <option value="Normal">Normal</option>
+                            <option value="High">High</option>
+                        </select>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Student No</th>
+                                    <th>Building/Room</th>
+                                    <th>Issue</th>
+                                    <th>Category</th>
+                                    <th>Status</th>
+                                    <th>Priority</th>
+                                    <th>Date</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-all-reports-body">
+                                <tr>
+                                    <td colspan="9" class="empty-state">No reports found</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Admin Users View -->
+            <div id="admin-users-view" class="dashboard-view">
+                <h1>Registered Students</h1>
+                <div class="card">
+                    <div class="filters">
+                        <input type="text" id="search-users" class="form-control" placeholder="Search by name or student number..." oninput="filterUsers()">
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Student No</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Building</th>
+                                    <th>Room</th>
+                                    <th>Floor</th>
+                                    <th>Date Registered</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-users-body">
+                                <tr>
+                                    <td colspan="7" class="empty-state">No users found</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Report Details Modal -->
+    <div id="report-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Report Details</h2>
+                <button class="close-btn" onclick="closeModal('report-modal')">&times;</button>
+            </div>
+            <div class="modal-body" id="report-modal-body">
+                <!-- Report details will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Chat Modal -->
+    <div id="chat-modal" class="modal">
+        <div class="modal-content chat-modal">
+            <div class="modal-header">
+                <h2 id="chat-title">Chat</h2>
+                <button class="close-btn" onclick="closeModal('chat-modal')">&times;</button>
+            </div>
+            <div class="chat-report-info" id="chat-report-info">
+                <!-- Report info will be inserted here -->
+            </div>
+            <div class="chat-messages" id="chat-messages">
+                <!-- Messages will be inserted here -->
+            </div>
+            <div class="chat-input">
+                <input type="text" id="chat-message-input" class="form-control" placeholder="Type your message..." onkeypress="handleChatKeyPress(event)">
+                <button class="btn btn-primary" onclick="sendChatMessage()">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
